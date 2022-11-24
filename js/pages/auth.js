@@ -46,13 +46,16 @@ export const handleAuth = (event) => {
   // 유효성 검사 통과 후 로그인 또는 회원가입 API 요청
   const authBtnText = document.querySelector("#authBtn").value;
   if (authBtnText === "로그인") {
-    // 유효성검사 후 로그인 성공 시 팬명록 화면으로
-
+    // 유효성검사 후 로그인 성공 시 뉴스피드 화면으로
     signInWithEmailAndPassword(authService, emailVal, pwVal)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        window.location.hash = "#fanLog";
+        window.location.hash = "#newsfeed";
+        console.log("로그인 성공")
+        document.getElementById("logoutBtn").style.display = "none";
+        document.getElementById("loginBtn").style.display = "block";
+        console.log("logoutBtn 가리기, loginBtn 보이기")
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -70,7 +73,7 @@ export const handleAuth = (event) => {
       .then((userCredential) => {
         // Signed in
         console.log("회원가입 성공!");
-        // const user = userCredential.user;
+        const user = userCredential.user;
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -124,6 +127,8 @@ export const logout = () => {
       // Sign-out successful.
       localStorage.clear();
       console.log("로그아웃 성공");
+      document.getElementById("loginBtn").style.display = "none";
+      document.getElementById("logoutBtn").style.display = "block";
     })
     .catch((error) => {
       // An error happened.

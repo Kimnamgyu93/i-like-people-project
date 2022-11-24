@@ -1,14 +1,18 @@
 import { handleAuth, onToggle, logout } from "./pages/auth.js";
 import { changeProfile, onFileChange } from "./pages/profile.js";
 import { socialLogin } from "./pages/auth.js";
-import { handleLocation, goToProfile } from "./router.js";
+import { handleLocation, goToProfile, route } from "./router.js";
 import { authService } from "./firebase.js";
 import {
+  // socialLogin,
+  // logout,
+  // onToggle,
+  // handleAuth,
   save_comment,
   update_comment,
   onEditing,
   delete_comment,
-} from "./pages/fanLog.js";
+} from "./pages/newsfeed.js";
 
 // url 바뀌면 handleLocation 실행하여 화면 변경
 window.addEventListener("hashchange", handleLocation);
@@ -24,12 +28,12 @@ document.addEventListener("DOMContentLoaded", function () {
       // 로그인 상태이므로 항상 팬명록 화면으로 이동
       if (hash === "") {
         // 로그인 상태에서는 로그인 화면으로 되돌아갈 수 없게 설정
-        window.location.replace("#fanLog");
+        // window.location.replace("#newsfeed");
       }
     } else {
       // 로그아웃 상태이므로 로그인 화면으로 강제 이동
       if (hash !== "") {
-        window.location.replace("");
+        // window.location.replace("");
       }
     }
   });
@@ -47,3 +51,4 @@ window.save_comment = save_comment;
 window.update_comment = update_comment;
 window.onEditing = onEditing;
 window.delete_comment = delete_comment;
+window.route = route;
